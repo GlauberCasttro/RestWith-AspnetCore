@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestWebApiAspnetCore.Model;
+using RestWebApiAspnetCore.Services;
 
 namespace RestWebApiAspnetCore.Controllers
 {
@@ -11,36 +8,53 @@ namespace RestWebApiAspnetCore.Controllers
     [ApiController]
     public class PessoaController : ControllerBase
     {
+        private IPessoaService _pessoaService;
+
+        public PessoaController(IPessoaService pessoaService)
+        {
+            _pessoaService = pessoaService;
+        }
+
+
         // GET: api/Pessoa
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_pessoaService.FindAll());
         }
 
         // GET: api/Pessoa/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var person = _pessoaService.FindById(id);
+            if (person == null) return NotFound();
+            return Ok(person);
         }
 
         // POST: api/Pessoa
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Pessoa pessoa)
         {
+            if (pessoa == null) return BadRequest();
+            return new ObjectResult(_pessoaService.Create(pessoa));
         }
 
         // PUT: api/Pessoa/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put([FromBody] Pessoa pessoa)
         {
+
+            if (pessoa == null) return BadRequest();
+            return new ObjectResult(_pessoaService.Update(pessoa));
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _pessoaService.Delete(id);
+            return NoContent();
         }
     }
 }
