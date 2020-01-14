@@ -92,6 +92,8 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.dtbcache
+*.suo
 
 # Chutzpah Test files
 _Chutzpah*
@@ -324,6 +326,8 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+*.cache
+*.dtbcache
 
 # OpenCover UI analysis results
 OpenCover/
@@ -351,3 +355,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+RestWebApiAspnetCore/.vs/RestWebApiAspnetCore/DesignTimeBuild/.dtbcache
+RestWebApiAspnetCore/.vs/RestWebApiAspnetCore/v15/.suo
+RestWebApiAspnetCore/.vs/RestWebApiAspnetCore/v15/Server/sqlite3/storage.ide-shm
+RestWebApiAspnetCore/.vs/RestWebApiAspnetCore/v15/Server/sqlite3/storage.ide-wal
+RestWebApiAspnetCore/RestWebApiAspnetCore/obj/Debug/netcoreapp2.1/RestWebApiAspnetCore.csproj.CoreCompileInputs.cache
