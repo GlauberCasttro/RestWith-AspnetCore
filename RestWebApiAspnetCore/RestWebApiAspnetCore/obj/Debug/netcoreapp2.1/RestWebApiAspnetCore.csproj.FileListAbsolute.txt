@@ -12,3 +12,17 @@ C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore
 C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.RazorTargetAssemblyInfo.cache
 C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.dll
 C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.pdb
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\bin\Debug\netcoreapp2.1\RestWebApiAspnetCore.deps.json
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\bin\Debug\netcoreapp2.1\RestWebApiAspnetCore.runtimeconfig.json
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\bin\Debug\netcoreapp2.1\RestWebApiAspnetCore.runtimeconfig.dev.json
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\bin\Debug\netcoreapp2.1\RestWebApiAspnetCore.dll
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\bin\Debug\netcoreapp2.1\RestWebApiAspnetCore.pdb
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.csprojAssemblyReference.cache
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.csproj.CoreCompileInputs.cache
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.RazorAssemblyInfo.cache
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.RazorAssemblyInfo.cs
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.AssemblyInfoInputs.cache
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.AssemblyInfo.cs
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.RazorTargetAssemblyInfo.cache
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.dll
+C:\Users\grobi\OneDrive\Documentos\Projetos\CursoWebApiUdemy\RestWith-AspnetCore\RestWith-AspnetCore\RestWebApiAspnetCore\RestWebApiAspnetCore\obj\Debug\netcoreapp2.1\RestWebApiAspnetCore.pdb
