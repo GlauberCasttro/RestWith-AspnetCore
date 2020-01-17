@@ -5,14 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using RestWebApiAspnetCore.Model;
 
-namespace RestWebApiAspnetCore.Services.Implementation
+namespace RestWebApiAspnetCore.Repository.Implementation
 {
-    public class PessoaServiceImpl : IPessoaService
+    public class PessoaRepositoryImpl : IPessoaRepository
     {
 
         private MySqlContext _context;
 
-        public PessoaServiceImpl( MySqlContext context)
+        public PessoaRepositoryImpl( MySqlContext context)
         {
             _context = context;
         }
@@ -84,7 +84,7 @@ namespace RestWebApiAspnetCore.Services.Implementation
             return result;
         }
 
-        private bool Exist(long? pessoaId)
+        public bool Exist(long? pessoaId)
         {
             return _context.Pessoa.Any(p => p.Id.Equals(pessoaId));
         }

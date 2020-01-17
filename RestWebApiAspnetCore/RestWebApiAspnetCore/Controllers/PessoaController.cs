@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Model;
-using RestWebApiAspnetCore.Services;
+using RestWebApiAspnetCore.Business;
 
 namespace RestWebApiAspnetCore.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/Pessoa/v{version:apiVersion}")]
     [ApiController]
     public class PessoaController : ControllerBase
     {
-        private IPessoaService _pessoaService;
+        private IPessoaBusiness _pessoaBusiness;
 
-        public PessoaController(IPessoaService pessoaService)
+        public PessoaController(IPessoaBusiness pessoaBusiness)
         {
-            _pessoaService = pessoaService;
+            _pessoaBusiness = pessoaBusiness;
         }
 
 
@@ -20,15 +21,15 @@ namespace RestWebApiAspnetCore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_pessoaService.FindAll());
+            return Ok(_pessoaBusiness.FindAll());
         }
 
         // GET: api/Pessoa/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
-            var person = _pessoaService.FindById(id);
-            if (person == null) return NotFound();
+            var person = _pessoaBusiness.FindById(id);
+            if (person == null) return NotFound("Não foi encontrado o recurso " + id + "!!!");
             return Ok(person);
         }
 
@@ -37,7 +38,7 @@ namespace RestWebApiAspnetCore.Controllers
         public IActionResult Post([FromBody] Pessoa pessoa)
         {
             if (pessoa == null) return BadRequest();
-            return new ObjectResult(_pessoaService.Create(pessoa));
+            return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
         // PUT: api/Pessoa/5
@@ -46,14 +47,14 @@ namespace RestWebApiAspnetCore.Controllers
         {
 
             if (pessoa == null) return BadRequest();
-            return new ObjectResult(_pessoaService.Update(pessoa));
+            return new ObjectResult(_pessoaBusiness.Update(pessoa));
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _pessoaService.Delete(id);
+            _pessoaBusiness.Delete(id);
             return NoContent();
         }
     }

@@ -1,9 +1,9 @@
 ﻿using RestWebApiAspnetCore.Model;
 using System.Collections.Generic;
 
-namespace RestWebApiAspnetCore.Services
+namespace RestWebApiAspnetCore.Business
 {
-    public interface IPessoaService
+    public interface IPessoaBusiness
     {
         Pessoa Create(Pessoa pessoa);
         Pessoa FindById(long id);
