@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace RestWebApiAspnetCore.Model
+namespace RestWebApiAspnetCore.Model.Context
 {
     public class MySqlContext : DbContext
     {
@@ -16,7 +12,10 @@ namespace RestWebApiAspnetCore.Model
         public MySqlContext( DbContextOptions<MySqlContext> options) : base(options) 
         {
         }
+        public DbSet<Livro> Livro { get; set; }
 
         public DbSet<Pessoa> Pessoa { get; set; }
+
+       
     }
 }
