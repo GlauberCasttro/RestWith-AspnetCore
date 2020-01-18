@@ -1,9 +1,8 @@
-﻿using System;
+﻿using RestWebApiAspnetCore.Model;
+using RestWebApiAspnetCore.Model.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using RestWebApiAspnetCore.Model;
 
 namespace RestWebApiAspnetCore.Repository.Implementation
 {
@@ -16,7 +15,7 @@ namespace RestWebApiAspnetCore.Repository.Implementation
         {
             _context = context;
         }
-        private volatile int count;
+       // private volatile int count;
 
         public Pessoa Create(Pessoa pessoa)
         {
@@ -35,7 +34,7 @@ namespace RestWebApiAspnetCore.Repository.Implementation
         public Pessoa FindById(long id)
         {
 
-           return _context.Pessoa.SingleOrDefault(p => p.Id.Equals(id));
+            return _context.Pessoa.SingleOrDefault(p => p.Id.Equals(id));
 
             //return new Pessoa
             //{
@@ -65,11 +64,12 @@ namespace RestWebApiAspnetCore.Repository.Implementation
         public Pessoa Update(Pessoa pessoa)
         {
 
-            if (!Exist(pessoa.Id)) return new Pessoa();
+            if (!Exist(pessoa.Id)) return null;
             var result = _context.Pessoa.SingleOrDefault(p => p.Id.Equals(pessoa.Id));
 
             if (result != null)
             {
+
                 try
                 {
                     _context.Entry(result).CurrentValues.SetValues(pessoa);
@@ -79,16 +79,11 @@ namespace RestWebApiAspnetCore.Repository.Implementation
                 {
                     throw ex;
                 }
+
             }
         
             return result;
         }
-
-        public bool Exist(long? pessoaId)
-        {
-            return _context.Pessoa.Any(p => p.Id.Equals(pessoaId));
-        }
-
         public void Delete(long id)
         {
 
@@ -100,7 +95,7 @@ namespace RestWebApiAspnetCore.Repository.Implementation
                     _context.Pessoa.Remove(result);
                     _context.SaveChanges();
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -108,21 +103,28 @@ namespace RestWebApiAspnetCore.Repository.Implementation
             }
         }
 
-        private Pessoa mockpessoa(int i)
+
+        public bool Exist(long? pessoaId)
         {
-            return new Pessoa
-            {
-                Id = incrementGetID(),
-                Nome = "Pessoa Nome" + i,
-                Sobrenome = "Pessoa sobrenome" + i,
-                Endereco = "Rua rio grande do sul, 646" + i,
-                Genero = "Masculino" + i
-            };
+            return _context.Pessoa.Any(p => p.Id.Equals(pessoaId));
         }
 
-        private long incrementGetID()
-        {
-            return Interlocked.Increment(ref count);
-        }
+       
+        //private Pessoa mockpessoa(int i)
+        //{
+        //    return new Pessoa
+        //    {
+        //        Id = incrementGetID(),
+        //        Nome = "Pessoa Nome" + i,
+        //        Sobrenome = "Pessoa sobrenome" + i,
+        //        Endereco = "Rua rio grande do sul, 646" + i,
+        //        Genero = "Masculino" + i
+        //    };
+        //}
+
+        //private long incrementGetID()
+        //{
+        //    return Interlocked.Increment(ref count);
+        //}
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Business;
 
@@ -31,23 +32,42 @@ namespace RestWebApiAspnetCore.Controllers
             var person = _pessoaBusiness.FindById(id);
             if (person == null) return NotFound("Não foi encontrado o recurso " + id + "!!!");
             return Ok(person);
+
+            
         }
 
         // POST: api/Pessoa
         [HttpPost]
         public IActionResult Post([FromBody] Pessoa pessoa)
         {
-            if (pessoa == null) return BadRequest();
+
+            if (pessoa == null)
+            {
+                return BadRequest();
+            }
+
+            pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
             return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
         // PUT: api/Pessoa/5
-        [HttpPut("{id}")]
+        [HttpPut()]
         public IActionResult Put([FromBody] Pessoa pessoa)
         {
 
-            if (pessoa == null) return BadRequest();
-            return new ObjectResult(_pessoaBusiness.Update(pessoa));
+
+            if (!ModelState.IsValid && pessoa == null)
+            {
+                return BadRequest();
+            }
+
+            pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            var upPessoa = _pessoaBusiness.Update(pessoa);
+            if (upPessoa == null)
+            {
+                return BadRequest();
+            }
+            return new ObjectResult(upPessoa);
         }
 
         // DELETE: api/ApiWithActions/5
