@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Business;
 using RestWebApiAspnetCore.Model;
+using RestWebApiAspnetCore.Repository.Generic;
 
 namespace RestWebApiAspnetCore.Controllers
 {
@@ -16,9 +17,9 @@ namespace RestWebApiAspnetCore.Controllers
     public class LivroController : Controller
     {
 
-        private ILivroBusiness _livroBusiness;
+        private IRepository<Livro> _livroBusiness;
 
-        public LivroController( ILivroBusiness livroBusiness)
+        public LivroController( IRepository<Livro> livroBusiness)
         {
             _livroBusiness = livroBusiness;
         }

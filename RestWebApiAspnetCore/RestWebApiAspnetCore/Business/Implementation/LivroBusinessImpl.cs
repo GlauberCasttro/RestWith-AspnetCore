@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository;
+using RestWebApiAspnetCore.Repository.Generic;
 
 namespace RestWebApiAspnetCore.Business.Implementation
 {
     public class LivroBusinessImpl : ILivroBusiness
 
     {
-        private ILivroRepository _repository;
+        //private ILivroRepository _repository;
 
-        public LivroBusinessImpl(ILivroRepository repository)
+        private  IRepository<Livro> _repository;
+
+        public LivroBusinessImpl(IRepository<Livro> repository)
         {
             _repository = repository;
         }

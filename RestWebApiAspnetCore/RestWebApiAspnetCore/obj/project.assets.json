@@ -13375,11 +13375,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore.csproj",
+      "projectUniqueName": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore.csproj",
       "projectName": "RestWebApiAspnetCore",
-      "projectPath": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore.csproj",
+      "projectPath": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore.csproj",
       "packagesPath": "C:\\Users\\grobi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\obj\\",
+      "outputPath": "C:\\Users\\grobi\\OneDrive\\Documentos\\Projetos\\CursoWebApiUdemy\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWith-AspnetCore\\RestWebApiAspnetCore\\RestWebApiAspnetCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

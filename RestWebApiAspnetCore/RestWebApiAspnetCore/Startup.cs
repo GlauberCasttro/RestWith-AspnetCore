@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Business;
 using RestWebApiAspnetCore.Business.Implementation;
 using RestWebApiAspnetCore.Model.Context;
 using RestWebApiAspnetCore.Repository;
+using RestWebApiAspnetCore.Repository.Generic;
 using RestWebApiAspnetCore.Repository.Implementation;
 
 
@@ -70,6 +70,8 @@ namespace RestWebApiAspnetCore
 
             services.AddScoped<ILivroBusiness, LivroBusinessImpl>();
             services.AddScoped<ILivroRepository, LivroRepositoryImpl>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
