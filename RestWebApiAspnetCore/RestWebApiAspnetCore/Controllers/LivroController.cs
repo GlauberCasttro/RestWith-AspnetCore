@@ -59,7 +59,7 @@ namespace RestWebApiAspnetCore.Controllers
             return new ObjectResult(upLivro);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _livroBusiness.Delete(id);

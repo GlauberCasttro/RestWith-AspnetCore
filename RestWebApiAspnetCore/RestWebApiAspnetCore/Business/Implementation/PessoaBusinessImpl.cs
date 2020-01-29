@@ -5,15 +5,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository;
+using RestWebApiAspnetCore.Repository.Generic;
 
 namespace RestWebApiAspnetCore.Business.Implementation
 {
     public class PessoaBusinessImpl : IPessoaBusiness
     {
 
-        private IPessoaRepository _repository;
+        private IRepository<Pessoa> _repository;
 
-        public PessoaBusinessImpl(IPessoaRepository repository)
+        public PessoaBusinessImpl(IRepository<Pessoa> repository)
         {
             _repository = repository;
         }
