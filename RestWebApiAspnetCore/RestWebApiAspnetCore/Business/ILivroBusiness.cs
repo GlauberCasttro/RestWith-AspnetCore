@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 
 namespace RestWebApiAspnetCore.Business
 {
      public interface ILivroBusiness 
     {
-        Livro Create(Livro livro);
-        Livro FindById(long id);
-        List<Livro> FindAll();
-        Livro Update(Livro livro);
+        LivroVO Create(LivroVO livro);
+        LivroVO FindById(long id);
+        List<LivroVO> FindAll();
+        LivroVO Update(LivroVO livro);
         void Delete(long id);
+
+       
     }
 }

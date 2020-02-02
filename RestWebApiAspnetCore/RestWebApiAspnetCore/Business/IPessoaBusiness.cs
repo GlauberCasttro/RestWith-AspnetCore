@@ -1,14 +1,14 @@
-﻿using RestWebApiAspnetCore.Model;
+﻿using RestWebApiAspnetCore.Data.VO;
 using System.Collections.Generic;
 
 namespace RestWebApiAspnetCore.Business
 {
     public interface IPessoaBusiness
     {
-        Pessoa Create(Pessoa pessoa);
-        Pessoa FindById(long id);
-        List<Pessoa> FindAll();
-        Pessoa Update(Pessoa pessoa);
+        PessoaVO Create(PessoaVO pessoa);
+        PessoaVO FindById(long id);
+        List<PessoaVO> FindAll();
+        PessoaVO Update(PessoaVO pessoa);
         void Delete(long id);
     }
 }

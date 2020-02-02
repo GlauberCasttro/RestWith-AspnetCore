@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Business;
+using RestWebApiAspnetCore.Data.VO;
 
 namespace RestWebApiAspnetCore.Controllers
 {
@@ -38,21 +39,20 @@ namespace RestWebApiAspnetCore.Controllers
 
         // POST: api/Pessoa
         [HttpPost]
-        public IActionResult Post([FromBody] Pessoa pessoa)
+        public IActionResult Post([FromBody] PessoaVO pessoa)
         {
 
             if (pessoa == null)
             {
                 return BadRequest();
             }
-
-            pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            
             return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
         // PUT: api/Pessoa/5
         [HttpPut()]
-        public IActionResult Put([FromBody] Pessoa pessoa)
+        public IActionResult Put([FromBody] PessoaVO pessoa)
         {
 
 
@@ -60,8 +60,6 @@ namespace RestWebApiAspnetCore.Controllers
             {
                 return BadRequest();
             }
-
-            pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
             var upPessoa = _pessoaBusiness.Update(pessoa);
             if (upPessoa == null)
             {

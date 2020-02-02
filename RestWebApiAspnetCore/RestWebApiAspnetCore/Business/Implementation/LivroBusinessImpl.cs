@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestWebApiAspnetCore.Data.Converters;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository;
 using RestWebApiAspnetCore.Repository.Generic;
@@ -14,31 +16,37 @@ namespace RestWebApiAspnetCore.Business.Implementation
         //private ILivroRepository _repository;
 
         private  IRepository<Livro> _repository;
+        private readonly LivroConverter _convert;
 
         public LivroBusinessImpl(IRepository<Livro> repository)
         {
             _repository = repository;
+            _convert = new LivroConverter();
         }
-        public Livro Create(Livro livro)
+        public LivroVO Create(LivroVO livro)
         {
-           return _repository.Create(livro);
+            var livroEntity = _convert.Parse(livro);
+            livroEntity=  _repository.Create(livroEntity);
+            return _convert.Parse(livroEntity);
         }
 
      
 
-        public Livro FindById(long id)
+        public LivroVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _convert.Parse(_repository.FindById(id));
         }
 
-        public List<Livro> FindAll()
+        public List<LivroVO> FindAll()
         {
-            return _repository.FindAll();
+            return _convert.ParseList(_repository.FindAll());
         }
 
-        public Livro Update(Livro livro)
+        public LivroVO Update(LivroVO livro)
         {
-            return _repository.Update(livro);
+            var livroEntity = _convert.Parse(livro);
+            livroEntity = _repository.Update(livroEntity);
+            return _convert.Parse(livroEntity);
         }
 
         public void Delete(long id)

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using RestWebApiAspnetCore.Data.Converters;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
-using RestWebApiAspnetCore.Repository;
 using RestWebApiAspnetCore.Repository.Generic;
+using System;
+using System.Collections.Generic;
 
 namespace RestWebApiAspnetCore.Business.Implementation
 {
@@ -13,42 +11,50 @@ namespace RestWebApiAspnetCore.Business.Implementation
     {
 
         private IRepository<Pessoa> _repository;
+        private readonly PessoaConverter _converter;
 
         public PessoaBusinessImpl(IRepository<Pessoa> repository)
         {
             _repository = repository;
+            _converter = new PessoaConverter();
         }
 
-        public Pessoa Create(Pessoa pessoa)
+        public PessoaVO Create(PessoaVO pessoa)
         {
-            return _repository.Create(pessoa);
+            // pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+           // pessoa.DataCriacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            var pessoaEntity = _converter.Parse(pessoa);
+            pessoaEntity = _repository.Create(pessoaEntity);
+            return _converter.Parse(pessoaEntity);
         }
 
-        public Pessoa FindById(long id)
-        {
-
-            return _repository.FindById(id);
-
-        }
-
-        public List<Pessoa> FindAll()
+        public PessoaVO FindById(long id)
         {
 
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindById(id));
 
         }
-        
-        public Pessoa Update(Pessoa pessoa)
+
+        public List<PessoaVO> FindAll()
         {
 
-            return _repository.Update(pessoa);
+            return _converter.ParseList(_repository.FindAll());
+
         }
+
+        public PessoaVO Update(PessoaVO pessoa)
+
+        {
+            pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
+            var pessoaEntity = _converter.Parse(pessoa);
+            pessoaEntity = _repository.Update(pessoaEntity);
+            return _converter.Parse(pessoaEntity);
+        }
+
         public void Delete(long id)
         {
-
             _repository.Delete(id);
         }
 
     }
-
 }

@@ -6,24 +6,24 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using RestWebApiAspnetCore.Model.Base;
 
-namespace RestWebApiAspnetCore.Model
-{
-    public class Pessoa : BaseEntity
-    {
+namespace RestWebApiAspnetCore.Data.VO
+{   
+    public class PessoaVO
+    { 
 
-        [Required]
+
+        public long? Id { get; set; }
         public string Nome { get; set; }
-        [Required]
+       
         public string Sobrenome { get; set; }
-        [Required]
+       
         public string Endereco { get; set; }
-        [Required]
+       
         public string Genero { get; set; }
-
+   
         public DateTime? Atualizacao { get; set; }
 
-        //public DateTime? DataCriacao { get; set; }
-
+       // public DateTime? DataCriacao { get; set; }
 
     }
 }
