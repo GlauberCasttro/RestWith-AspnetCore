@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Business;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository.Generic;
 
@@ -17,9 +18,9 @@ namespace RestWebApiAspnetCore.Controllers
     public class LivroController : Controller
     {
 
-        private IRepository<Livro> _livroBusiness;
+        private ILivroBusiness _livroBusiness;
 
-        public LivroController( IRepository<Livro> livroBusiness)
+        public LivroController( ILivroBusiness livroBusiness)
         {
             _livroBusiness = livroBusiness;
         }
@@ -43,14 +44,14 @@ namespace RestWebApiAspnetCore.Controllers
 
         // GET: Livro/Create
         [HttpPost()]
-        public IActionResult Create([FromBody] Livro livro)
+        public IActionResult Create([FromBody] LivroVO livro)
         {
             if (livro == null && !ModelState.IsValid) return BadRequest();
             return new ObjectResult(_livroBusiness.Create(livro));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Livro livro)
+        public IActionResult Put([FromBody] LivroVO livro)
         {
             if (livro == null) return BadRequest();
             var upLivro = _livroBusiness.Update(livro);

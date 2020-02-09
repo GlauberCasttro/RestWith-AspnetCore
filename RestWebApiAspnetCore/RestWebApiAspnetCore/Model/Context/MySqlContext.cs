@@ -14,6 +14,7 @@ namespace RestWebApiAspnetCore.Model.Context
         }
         public DbSet<Livro> Livro { get; set; }
 
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
 
        

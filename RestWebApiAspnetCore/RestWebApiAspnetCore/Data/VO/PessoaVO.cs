@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using RestWebApiAspnetCore.Model.Base;
+using Tapioca.HATEOAS;
 
 namespace RestWebApiAspnetCore.Data.VO
 {   
-    public class PessoaVO
+    public class PessoaVO : ISupportsHyperMedia
     { 
 
 
@@ -25,5 +26,8 @@ namespace RestWebApiAspnetCore.Data.VO
 
        // public DateTime? DataCriacao { get; set; }
 
+
+       //Implementando HATEOAS
+       public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }

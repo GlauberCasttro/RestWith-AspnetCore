@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Business;
 using RestWebApiAspnetCore.Data.VO;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Tapioca.HATEOAS;
 
 namespace RestWebApiAspnetCore.Controllers
 {
@@ -21,6 +25,12 @@ namespace RestWebApiAspnetCore.Controllers
 
         // GET: api/Pessoa
         [HttpGet]
+        [SwaggerResponse((200), typeof(List<PessoaVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Get()
         {
             return Ok(_pessoaBusiness.FindAll());
@@ -28,17 +38,28 @@ namespace RestWebApiAspnetCore.Controllers
 
         // GET: api/Pessoa/5
         [HttpGet("{id}", Name = "Get")]
+        [SwaggerResponse((200), typeof(PessoaVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Get(int id)
         {
             var person = _pessoaBusiness.FindById(id);
             if (person == null) return NotFound("Não foi encontrado o recurso " + id + "!!!");
             return Ok(person);
 
-            
+
         }
 
         // POST: api/Pessoa
         [HttpPost]
+        [SwaggerResponse((201), typeof(PessoaVO))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Post([FromBody] PessoaVO pessoa)
         {
 
@@ -46,12 +67,17 @@ namespace RestWebApiAspnetCore.Controllers
             {
                 return BadRequest();
             }
-            
+
             return new ObjectResult(_pessoaBusiness.Create(pessoa));
         }
 
         // PUT: api/Pessoa/5
         [HttpPut()]
+        [SwaggerResponse((202), typeof(PessoaVO))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Put([FromBody] PessoaVO pessoa)
         {
 
@@ -70,6 +96,11 @@ namespace RestWebApiAspnetCore.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
         public IActionResult Delete(int id)
         {
             _pessoaBusiness.Delete(id);
