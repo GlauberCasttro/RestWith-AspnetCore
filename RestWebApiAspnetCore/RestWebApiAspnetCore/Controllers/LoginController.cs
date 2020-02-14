@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Business;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -12,6 +13,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace RestWebApiAspnetCore.Controllers
 {
     [ApiVersion("1")]
+    [Route("api/login/v{version:apiVersion}")]
+    [ApiController]
     public class LoginController : Controller
     {
         private ILoginBusiness _loginBusiness;
@@ -22,7 +25,7 @@ namespace RestWebApiAspnetCore.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public Object Post([FromBody]Usuario usuario)
+        public Object Post([FromBody]UsuarioVO usuario)
         {
             if (usuario == null) return BadRequest();
             return _loginBusiness.FindByLogin(usuario);

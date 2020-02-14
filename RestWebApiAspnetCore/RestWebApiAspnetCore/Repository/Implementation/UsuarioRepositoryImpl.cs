@@ -19,7 +19,7 @@ namespace RestWebApiAspnetCore.Repository.Implementation
         public Usuario FindByLogin(string login)
         {
 
-            return _context.Usuario.SingleOrDefault(u => u.Login.Equals(login));
+            return _context.Usuario.SingleOrDefault(usu=> usu.Login.Equals(login));
         }
 
         

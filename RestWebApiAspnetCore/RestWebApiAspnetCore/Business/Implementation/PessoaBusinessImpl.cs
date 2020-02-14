@@ -18,7 +18,6 @@ namespace RestWebApiAspnetCore.Business.Implementation
             _repository = repository;
             _converter = new PessoaConverter();
         }
-
         public PessoaVO Create(PessoaVO pessoa)
         {
             // pessoa.Atualizacao = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
@@ -30,16 +29,12 @@ namespace RestWebApiAspnetCore.Business.Implementation
 
         public PessoaVO FindById(long id)
         {
-
             return _converter.Parse(_repository.FindById(id));
-
         }
 
         public List<PessoaVO> FindAll()
         {
-
             return _converter.ParseList(_repository.FindAll());
-
         }
 
         public PessoaVO Update(PessoaVO pessoa)

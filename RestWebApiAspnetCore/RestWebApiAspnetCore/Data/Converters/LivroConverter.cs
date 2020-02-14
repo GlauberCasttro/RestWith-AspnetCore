@@ -21,8 +21,6 @@ namespace RestWebApiAspnetCore.Data.Converters
                 DataLancamento = origin.DataLancamento,
                 Titulo = origin.Titulo,
                 preco = origin.preco
-
-
             };
         }
 

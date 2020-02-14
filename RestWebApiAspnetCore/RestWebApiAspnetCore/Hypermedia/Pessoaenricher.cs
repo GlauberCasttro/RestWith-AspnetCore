@@ -13,7 +13,8 @@ namespace RestWebApiAspnetCore.Hypermedia
             var url = new {controller = path, id = content.Id};
             content.Links.Add(new HyperMediaLink()
             {
-                Action = HttpActionVerb.GET,Href = urlHelper.Link("DefaultApi",url),
+                Action = HttpActionVerb.GET,
+                Href = urlHelper.Link("DefaultApi",url),
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultGet
             });

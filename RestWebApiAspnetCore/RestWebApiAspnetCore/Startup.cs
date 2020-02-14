@@ -60,6 +60,7 @@ namespace RestWebApiAspnetCore
 
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ObjectContentResponseEnricherList.Add(new PessoaEnricher());
+            filterOptions.ObjectContentResponseEnricherList.Add(new Livroenricher());
             services.AddSingleton(filterOptions);
 
 
@@ -112,8 +113,7 @@ namespace RestWebApiAspnetCore
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
-
-            //serviço para versionar a API----------------------------------------------------------
+//-------------------------Serviço para versionar a API----------------------------------------------------------
             services.AddApiVersioning(option => option.ReportApiVersions = true);
 
             //Adcionando serviço do swagger
@@ -136,6 +136,10 @@ namespace RestWebApiAspnetCore
             services.AddScoped<ILivroBusiness, LivroBusinessImpl>();
             services.AddScoped<ILivroRepository, LivroRepositoryImpl>();
 
+            //-------injeção de dependencia de login
+            services.AddScoped<ILoginBusiness,LoginBusinessImpl>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepositorioImpl>();
+
             //----------------------------injeção de dependence--------------------------------------//
 
             //------------------------------injecao de dependencia do repositorio generico
@@ -152,6 +156,7 @@ namespace RestWebApiAspnetCore
                     var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
                     var evolve = new Evolve.Evolve(evolveConnection, msg => _logger.LogInformation(msg))
                     {
+                        //locais para pegar os dados das migrations
                         Locations = new List<string> {"db/migrations", "db/dataset"},
                         IsEraseDisabled = true,
                     };
@@ -178,7 +183,7 @@ namespace RestWebApiAspnetCore
             }
 
             app.UseHttpsRedirection();
-//-----------------------------------------------------Configuração do Swagger
+//-----------------------------------------------------Configuração do Swagger---------------------------
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -187,7 +192,7 @@ namespace RestWebApiAspnetCore
             var option = new RewriteOptions();
             option.AddRedirect("^$", "swagger");
             app.UseRewriter(option);
-//--------------------------------------------------------------------------             
+//---------------------------------------------Rota padrão do sistema--------------------------------------------------------------             
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

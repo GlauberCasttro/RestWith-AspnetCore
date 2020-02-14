@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestWebApiAspnetCore.Business;
 using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository.Generic;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Tapioca.HATEOAS;
 
 namespace RestWebApiAspnetCore.Controllers
 {
@@ -26,14 +29,25 @@ namespace RestWebApiAspnetCore.Controllers
         }
         // GET: Livro
         [HttpGet]
+        [SwaggerResponse((200), typeof(List<LivroVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+       // [Authorize("Bearer")]
         public IActionResult Get()
         {
-
             return Ok(_livroBusiness.FindAll());
         }
 
         // GET: Livro/Details/5
         [HttpGet("{id}", Name = "GetById")]
+        [SwaggerResponse((200), typeof(List<PessoaVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+       // [Authorize("Bearer")]
         public IActionResult Get(int id)
         {
             var livro = _livroBusiness.FindById(id);
@@ -42,15 +56,26 @@ namespace RestWebApiAspnetCore.Controllers
 
         }
 
-        // GET: Livro/Create
-        [HttpPost()]
+        // GET: Livro/Create[HttpPost]
+        [HttpPost]
+        [SwaggerResponse((201), typeof(PessoaVO))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+       // [Authorize("Bearer")]
         public IActionResult Create([FromBody] LivroVO livro)
         {
             if (livro == null && !ModelState.IsValid) return BadRequest();
             return new ObjectResult(_livroBusiness.Create(livro));
         }
 
-        [HttpPut]
+
+        [HttpPut()]
+        [SwaggerResponse((202), typeof(LivroVO))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+      //  [Authorize("Bearer")]
         public IActionResult Put([FromBody] LivroVO livro)
         {
             if (livro == null) return BadRequest();
@@ -60,7 +85,13 @@ namespace RestWebApiAspnetCore.Controllers
             return new ObjectResult(upLivro);
         }
 
+
         [HttpDelete("{id}")]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        //[Authorize("Bearer")]
         public IActionResult Delete(int id)
         {
             _livroBusiness.Delete(id);

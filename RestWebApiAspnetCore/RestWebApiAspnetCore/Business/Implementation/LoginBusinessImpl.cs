@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
+using RestWebApiAspnetCore.Data.VO;
 using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository;
 using RestWebApiAspnetCore.Security.Configuration;
@@ -25,24 +26,25 @@ namespace RestWebApiAspnetCore.Business.Implementation
             _repository = repository;
         }
 
-        public object FindByLogin(Usuario user)
+        public object FindByLogin(UsuarioVO user)
         {
             bool credentialsIsValid = true;
-            if (user != null && !string.IsNullOrWhiteSpace(user.Login))
+            if (user != null && !string.IsNullOrWhiteSpace(user.usuario))
             {
-                var baseUser = _repository.FindByLogin(user.Login);
-                credentialsIsValid = (baseUser != null && user.Login == baseUser.Login && baseUser.Senha == user.Senha);
+                var baseUser = _repository.FindByLogin(user.usuario);
+                credentialsIsValid = (baseUser != null && user.usuario == baseUser.Login 
+                                                       && baseUser.Senha == user.senha);
             }
 
             if (credentialsIsValid)
 
             {
                 ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.Login,"Login"),
+                new GenericIdentity(user.usuario,"Login"),
                 new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString("N")),
-                    new Claim(JwtRegisteredClaimNames.UniqueName,user.Login)
+                    new Claim(JwtRegisteredClaimNames.UniqueName,user.usuario)
                 
                 });
                 DateTime createDate = DateTime.Now;
@@ -56,7 +58,6 @@ namespace RestWebApiAspnetCore.Business.Implementation
             {
                 return ExceptionObject();
             }
-
         }
 
         private string CreateToken(ClaimsIdentity identity, DateTime createDate, DateTime expiratinDate, JwtSecurityTokenHandler handler)
@@ -79,7 +80,7 @@ namespace RestWebApiAspnetCore.Business.Implementation
             return new
             {
                 autenticated = false,
-                message = "FAILED"
+                message = " ACCESS FAILED"
             };
 
         }
