@@ -4,16 +4,18 @@ using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Repository.Generic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Tapioca.HATEOAS.Utils;
 
 namespace RestWebApiAspnetCore.Business.Implementation
 {
     public class PessoaBusinessImpl : IPessoaBusiness
     {
 
-        private IRepository<Pessoa> _repository;
+        private IPessoaRepository _repository;
         private readonly PessoaConverter _converter;
 
-        public PessoaBusinessImpl(IRepository<Pessoa> repository)
+        public PessoaBusinessImpl(IPessoaRepository repository)
         {
             _repository = repository;
             _converter = new PessoaConverter();
@@ -37,6 +39,12 @@ namespace RestWebApiAspnetCore.Business.Implementation
             return _converter.ParseList(_repository.FindAll());
         }
 
+        
+       public List<PessoaVO> FindByName(string firstName, string lastName)
+       {
+           return _converter.ParseList(_repository.FindByName(firstName, lastName));
+       }
+
         public PessoaVO Update(PessoaVO pessoa)
 
         {
@@ -49,6 +57,36 @@ namespace RestWebApiAspnetCore.Business.Implementation
         public void Delete(long id)
         {
             _repository.Delete(id);
+        }
+
+        public PagedSearchDTO<PessoaVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page)
+        {
+            string query = @"select * from pessoa p where 1=1 ";
+            if (!string.IsNullOrEmpty(name))
+            {
+                query += $"and p.nome like '%{name}%'";
+                query += $"order by p.nome {sortDirection} limit {pageSize} offset {page}";
+
+            }
+
+            string countQuery = @"select count(*) from pessoa p where 1 = 1 ";
+            if (!string.IsNullOrEmpty(name))
+            {
+                countQuery += $"and p.nome like '%{name}%'";
+                //countQuery += $"order by p.nome{sortDirection} limit {pageSize} offset{page}";
+
+            }
+
+            var pessoas = _repository.FindWithPagedSearch(query);
+            int totalResult = _repository.GetCount(countQuery);
+            return new PagedSearchDTO<PessoaVO>
+            {
+                CurrentPage = page,
+                List = _converter.ParseList(pessoas),
+                PageSize = pageSize,
+                SortDirections = sortDirection,
+                TotalResults = totalResult
+            };
         }
 
     }

@@ -14,5 +14,7 @@ namespace RestWebApiAspnetCore.Repository.Generic
         T Update(T item);
         void Delete(long id);
         bool Exist(long? TId);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }

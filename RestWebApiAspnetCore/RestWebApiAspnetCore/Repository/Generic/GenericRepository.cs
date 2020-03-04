@@ -9,7 +9,7 @@ namespace RestWebApiAspnetCore.Repository.Generic
 {
     public class GenericRepository<T>  : IRepository<T> where T : BaseEntity
     {
-        private MySqlContext _context;
+        protected readonly MySqlContext _context;
         private DbSet<T> dataset;
 
         public GenericRepository(MySqlContext context)
@@ -86,6 +86,16 @@ namespace RestWebApiAspnetCore.Repository.Generic
         public bool Exist(long? TId)
         {
             return dataset.Any(b => b.Id.Equals(TId));
+        }
+
+        //metodo para paginação
+        public List<T> FindWithPagedSearch(string query)
+        {
+            return dataset.FromSql<T>(query).ToList();
+        }
+        public int GetCount(string query)
+        {
+            return dataset.FromSql<T>(query).Count();
         }
     }
 }

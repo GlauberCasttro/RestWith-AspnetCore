@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RestWebApiAspnetCore.Model;
 using RestWebApiAspnetCore.Business;
 using RestWebApiAspnetCore.Data.VO;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -34,6 +33,19 @@ namespace RestWebApiAspnetCore.Controllers
         public IActionResult Get()
         {
             return Ok(_pessoaBusiness.FindAll());
+        }
+
+
+        [HttpGet("find-by-name")]
+        [SwaggerResponse((200), typeof(List<PessoaVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
+        public IActionResult GetByName([FromQuery] string firstName, string lastName)
+        {
+            return Ok(_pessoaBusiness.FindByName(firstName, lastName));
         }
 
         // GET: api/Pessoa/5
@@ -86,11 +98,13 @@ namespace RestWebApiAspnetCore.Controllers
             {
                 return BadRequest();
             }
+
             var upPessoa = _pessoaBusiness.Update(pessoa);
             if (upPessoa == null)
             {
                 return BadRequest();
             }
+
             return new ObjectResult(upPessoa);
         }
 
@@ -105,6 +119,24 @@ namespace RestWebApiAspnetCore.Controllers
         {
             _pessoaBusiness.Delete(id);
             return NoContent();
+
         }
+
+
+        [HttpGet("find-with-page-search/{sortDirection}/{pageSize}/{page}")]
+        [SwaggerResponse((200), typeof(List<PessoaVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(400)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
+        public IActionResult GetPagedSearch([FromQuery] string name, string sortDirection, int pageSize, int page)
+        {
+           // return OK(_pessoaBusiness.FindWithPagedSearch(name,sortDirection,pageSize,page));
+            return new OkObjectResult(_pessoaBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
+        }
+
     }
+
+
 }
